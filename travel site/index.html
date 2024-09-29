@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel Site</title>
+    </head>
+    <body>
+        <h1>Welcome to the Travel Site!</h1>
+        <form method="POST">
+            <label for="destination">Enter your destination:</label>
+            <input type="text" id="destination" name="destination" required>
+            <button type="submit">Search</button>
+        </form>
+    
+        {% if data %}
+            <h2>Businesses and Attractions in {{ destination }}:</h2>
+            <h3>Attractions:</h3>
+            <ul>
+                {% for attraction in data.attractions %}
+                    <li>{{ attraction }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Businesses:</h3>
+            <ul>
+                {% for business in data.businesses %}
+                    <li>{{ business }}</li>
+                {% endfor %}
+            </ul>
+    
+            <h3>Suggested Daily Itinerary:</h3>
+            <ul>
+                {% for item in itinerary %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
