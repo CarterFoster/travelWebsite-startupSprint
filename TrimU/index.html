@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrimU</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .search-box {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .barber-list {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .barber {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .barber:last-child {
+      border-bottom: none;
+    }
+    .barber h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+    .barber p {
+      margin: 5px 0;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>TrimU</h1>
+  <h1>Find a Barber Near You</h1>
+
+  <div class="search-box">
+    <input type="text" id="locationInput" placeholder="Enter your city or ZIP code" />
+    <button onclick="findBarbers()">Search</button>
+  </div>
+
+  <div id="barberList" class="barber-list"></div>
+
+  <script>
+    // Mock data for barbers
+    const barbers = [
+      { name: "John's Barbershop", address: "123 Main St, New York, NY", specialty: "Classic cuts and shaves", city: "New York", zipCode: "10001" },
+      { name: "The Modern Barber", address: "456 Elm St, Los Angeles, CA", specialty: "Trendy fades and beard trimming", city: "Los Angeles", zipCode: "90001" },
+      { name: "Urban Fades", address: "789 Maple St, Chicago, IL", specialty: "Urban fades and designs", city: "Chicago", zipCode: "60601" },
+      { name: "Classic Cuts", address: "101 Pine St, New York, NY", specialty: "Traditional cuts", city: "New York", zipCode: "10002" },
+      { name: "Fade Masters", address: "202 Oak St, Los Angeles, CA", specialty: "Master fades and beard care", city: "Los Angeles", zipCode: "90002" },
+      { name: "Brownstone Barber Shop", address: "301 S Main St STE 101, Blacksburg, VA", specialty: "Classic trims and high quality shaves", city: "Blacksburg", zipCode: "24060" },
+      { name: "Brownstone Barber Shop", address: "301 S Main St STE 101, Blacksburg, VA", specialty: "Classic trims and high quality shaves", city: "Blacksburg", zipCode: "24060" },
+      { name: "Hokie Hair", address: "217 N Main St, Blacksburg, VA", specialty: "Fresh shaves and high quality fades", city: "Blacksburg", zipCode: "24060" },
+      { name: "Executive Cutz", address: "410 N Main St, Blacksburg, VA 24060", specialty: "Classic trims and high quality shaves", city: "Blacksburg", zipCode: "24060" }
+
+
+    ];
+
+    // Function to find barbers by location
+    function findBarbers() {
+      const locationInput = document.getElementById('locationInput').value.toLowerCase();
+      const barberList = document.getElementById('barberList');
+      barberList.innerHTML = ''; // Clear previous results
+
+      // Filter barbers based on user input (by city or ZIP code)
+      const filteredBarbers = barbers.filter(barber => 
+        barber.city.toLowerCase().includes(locationInput) || 
+        barber.zipCode.includes(locationInput)
+      );
+
+      // Display the filtered barbers
+      if (filteredBarbers.length > 0) {
+        filteredBarbers.forEach(barber => {
+          barberList.innerHTML += `
+            <div class="barber">
+              <h3>${barber.name}</h3>
+              <p>${barber.address}</p>
+              <p><strong>Specialty:</strong> ${barber.specialty}</p>
+            </div>
+          `;
+        });
+      } else {
+        barberList.innerHTML = `<p>No barbers found in this location.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
